@@ -1,0 +1,3 @@
+pysros>=26.3
+nornir>=3.0.0
+netmiko>=4.3.0

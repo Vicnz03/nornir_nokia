@@ -105,6 +105,8 @@ def nokia_cli_config(
             
         elif mode == "commit_check":
             commit_check_output = conn.send_command("validate")
+            if commit_check_output == '':
+                commit_check_output = 'VALIDATION PASSED'
             task.host['commit_check'] = commit_check_output
             report_list.append([mode, 'commit_check', task.host['commit_check']])
 

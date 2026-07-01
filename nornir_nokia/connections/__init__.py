@@ -34,8 +34,9 @@ class NornirNokia:
             parameters["yang_directory"] = extras["yang_directory"]
         if "timeout" in extras:
             parameters["timeout"] = extras["timeout"]
-        if "hostkey_verify" in extras:
-            parameters["hostkey_verify"] = extras["hostkey_verify"]
+        # Default to not verifying host keys so first-time connections don't
+        # fail with "Unknown host key". Users can opt-in via extras.
+        parameters["hostkey_verify"] = extras.get("hostkey_verify", False)
         if "rebuild" in extras:
             parameters["rebuild"] = extras["rebuild"]
 

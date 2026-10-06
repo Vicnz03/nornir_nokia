@@ -113,13 +113,16 @@ def nokia_cli_config(
         if mode == "commit":
             if timer is not None and timer > 0:
                 logger.info(f"{task.host.name}: Using confirmed commit with timer {timer} seconds")
-                commit_output = conn.send_command(f"commit confirmed {timer} comment {comment}", read_timeout=120)
+                #commit_output = conn.send_command(f"commit confirmed {timer} comment {comment}", read_timeout=120)
+                # skip comment for now , as some devices may not support it
+                commit_output = conn.send_command(f"commit confirmed {timer}", read_timeout=120)
                 task.host['commit'] = commit_output
                 report_list.append([mode, 'commit', task.host['commit']])
                 sleep(10)
                 confirm_output = conn.send_command("commit confirmed accept", read_timeout=120)
             else:
-                commit_output = conn.send_command(f"commit comment {comment}", read_timeout=120)
+                #commit_output = conn.send_command(f"commit comment {comment}", read_timeout=120)
+                commit_output = conn.send_command("commit", read_timeout=120)
                 task.host['commit'] = commit_output
                 report_list.append([mode, 'commit', task.host['commit']])
 
